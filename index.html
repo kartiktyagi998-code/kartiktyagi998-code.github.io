@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>For Kanu: My Heart’s Secret — 3D Animated Couple Theme</title>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+    background: transparent !important;
+  }
+  body {
+    position: relative;
+    text-align: center;
+    background-attachment: fixed;
+  }
+  .main-slideshow-container {
+    margin: 35px auto 40px;
+    width: 660px;
+    height: 880px;
+    position: relative;
+    border-radius: 45px;
+    overflow: hidden;
+    box-shadow: 0 18px 36px rgba(101, 41, 255, 0.45);
+    border: 6px solid #ffb3cc;
+    box-sizing: border-box;
+    background: linear-gradient(145deg, #faf0f5, #e7a4c2);
+    filter: drop-shadow(0 0 10px #ffb3ec);
+  }
+  .slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1.7s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 40px;
+    display: block;
+    cursor: pointer;
+  }
+  .slide-img.active {
+    opacity: 1;
+    z-index: 5;
+    filter: drop-shadow(0 0 30px #ff99d9);
+  }
+  .content-container {
+    max-width: 640px;
+    margin: 20px auto 70px auto;
+    background: rgba(255, 236, 248, 0.86);
+    border-radius: 25px;
+    padding: 35px 40px;
+    box-shadow: 0 10px 44px rgba(248, 182, 220, 0.4);
+    backdrop-filter: blur(13px);
+    color: #b8297e;
+    text-align: left;
+  }
+  h1 {
+    font-size: 3em;
+    color: #ff8cce;
+    letter-spacing: 5px;
+    margin-top: 0;
+    text-shadow: 0 0 4px #ffcafb, 0 0 8px #ffdae3, 0 0 16px #ffc3d6;
+    animation: glowText 3.5s ease-in-out infinite alternate;
+    text-align: center;
+    font-weight: 700;
+  }
+  @keyframes glowText {
+    0% { text-shadow: 0 0 10px #ffbde9,0 0 18px #ffcfe1,0 0 24px #ffdcec; }
+    100% { text-shadow: 0 0 32px #faeffb,0 0 40px #f6d3e5,0 0 72px #ffeefa; }
+  }
+  .wireframe-btn {
+    position: relative;
+    display: block;
+    margin: 32px auto 12px auto;
+    text-align: center;
+    padding: 18px 50px;
+    font-size: 1.45em;
+    font-weight: bold;
+    color: #e94691;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    background: transparent;
+    border: 3px solid #f47eb2;
+    border-radius: 16px;
+    cursor: pointer;
+    overflow: hidden;
+    perspective: 1000px;
+    transition: color 0.3s ease, border-color 0.3s;
+    z-index: 11;
+    box-shadow: 0 0 18px #fd8ac3;
+  }
+  .wireframe-btn::before {
+    content: '';
+    position: absolute;
+    top: -17%; left: -13%; bottom: -17%; right: -13%;
+    border: 2.5px solid #ffbbec;
+    border-radius: 27px;
+    pointer-events: none;
+    box-shadow: 0 0 22px #ffb3e6c9;
+    animation: rotateWireframe 6s linear infinite;
+    transform-origin: center center;
+    z-index: 7;
+  }
+  @keyframes rotateWireframe {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+  }
+  .wireframe-btn:active {
+    animation: pulseWireframe 0.3s ease;
+    color: #e8dbff;
+    border-color: #ffdafc;
+    box-shadow: 0 0 18px #ffdafc, inset 0 0 11px #ffb8da;
+  }
+  @keyframes pulseWireframe {
+    0% { box-shadow: 0 0 6px #ffbde9; }
+    50% { box-shadow: 0 0 42px #ffeefb; }
+    100% { box-shadow: 0 0 6px #ffbde9; }
+  }
+  .section, .lyrics-card {
+    font-size: 1.24em;
+    line-height: 1.6em;
+    color: #ad1457;
+    background: linear-gradient(120deg, #fbecec 60%, #f8cbf3 100%);
+    border-radius: 24px;
+    margin: 22px 0;
+    padding: 28px 32px;
+    display: none;
+    align-items: center;
+    user-select: text;
+    box-shadow: 0 10px 28px rgba(249, 176, 217, 0.6);
+    z-index: 2;
+  }
+  .section.show, .lyrics-card.show {
+    display: flex;
+    animation: fadeInSection 1.8s ease forwards;
+  }
+  .lyrics-card {
+    flex-direction: column;
+    max-width: 640px;
+    margin: 36px auto 12px;
+    color: #d82165;
+    box-shadow: 0 0 22px #fdc2eccc;
+    background: linear-gradient(124deg, #fff3fb 40%, #f6a3e7 100%);
+  }
+  .final-question {
+    font-weight: 700;
+    font-size: 1.36em;
+    text-align: center;
+    color: #b80a5e;
+    text-shadow: 0 0 22px #ffbfdd;
+    margin-top: 28px;
+    display: none;
+    background-color: #fadeefcc;
+    border-radius: 20px;
+    padding: 28px 26px;
+    animation: fadeInSection 2.3s 1 forwards;
+  }
+  .final-question.show {
+    display: block;
+  }
+  @keyframes fadeInSection {
+    0% {opacity: 0; transform: translateY(25px);}
+    100% {opacity: 1; transform: translateY(0);}
+  }
+  .side-slideshow {
+    width: 130px;
+    height: 175px;
+    margin-right: 22px;
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px #f8bedd;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #fff2eb, #ffcbf3);
+  }
+  .side-slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1.7s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 18px;
+    display: block;
+    cursor: pointer;
+  }
+  .side-slide-img.active {
+    opacity: 1;
+    z-index: 4;
+    filter: drop-shadow(0 0 18px #fd8ac3);
+  }
+  .section-text {
+    flex: 1;
+    padding-left: 8px;
+  }
+  .audio-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    display: none; /* Hidden by default */
+  }
+  .audio-container.show {
+    display: flex;
+  }
+  .music-player {
+    background: linear-gradient(135deg, #fdcbf1, #ffafcc);
+    border-radius: 24px;
+    padding: 20px 24px;
+    width: 340px;
+    box-shadow: 0 6px 18px #f19ee2a0;
+    text-align: center;
+    font-family: 'Georgia', serif;
+    color: #4a2a4a;
+    user-select: none;
+  }
+  .player-header {
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-shadow: 0 0 2px #ea648a;
+  }
+  .player-controls audio {
+    width: 100%;
+    outline: none;
+    border-radius: 10px;
+    box-shadow: 0 0 12px #fbbcd6;
+    background: #fffcef;
+  }
+  .player-footer {
+    margin-top: 15px;
+    color: #d45d7d;
+    font-weight: 600;
+    font-style: italic;
+    text-shadow: 0 0 6px #fae0ef;
+  }
+  /* 3D Video background style */
+  .video-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    object-fit: cover;
+    z-index: -100 !important;
+    min-width: 100%;
+    min-height: 100%;
+    pointer-events: none;
+    opacity: 0.75;
+    background: #100a2f;
+    filter: blur(0px);
+  }
+  @media (max-width: 700px) {
+    .main-slideshow-container {
+      width: 95vw;
+      height: 620px;
+      border-radius: 40px;
+    }
+    .slide-img {
+      border-radius: 35px;
+      filter: drop-shadow(0 0 20px #ffbbee);
+    }
+    .content-container {
+      width: 90vw;
+      padding: 22px 22px;
+      border-radius: 30px;
+      text-align: center;
+    }
+    .section, .lyrics-card {
+      max-width: 90vw;
+      padding: 20px 24px;
+      flex-direction: column;
+      text-align: center;
+    }
+    .side-slideshow {
+      width: 95vw;
+      height: 210px;
+      margin: 0 0 18px 0;
+      border-radius: 20px;
+    }
+    .side-slide-img {
+      border-radius: 20px;
+    }
+    .section-text {
+      padding-left: 0;
+      margin-top: 16px;
+    }
+    .music-player {
+      width: 95vw;
+    }
+    audio {
+      width: 95vw;
+    }
+    h1 {
+      font-size: 2.8em;
+    }
+  }
+</style>
+<script>
+  // Lock content before load
+  document.documentElement.style.visibility = "hidden";
+  document.addEventListener('DOMContentLoaded', function () {
+    var password = prompt("Kanu, this page is just for your eyes.     My heart’s encrypted, but I hear you have the password—mind entering it for me?:");
+    if(password !== "Key Of Kartik Heart") {
+      document.body.innerHTML = '<h2 style="color:#d72660; text-align:center; margin-top:40px;">Sorry, incorrect password.<br>This page is private.</h2>';
+      document.documentElement.style.visibility = "visible";
+      document.title = "Private";
+      window.stop && window.stop();
+      throw new Error('Unauthorized Access');
+    }
+    document.documentElement.style.visibility = "visible";
+  }, true);
+</script>
+</head>
+<body>
+<video class="video-bg" autoplay muted loop playsinline>
+  <source src="romantic_3d_background_video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<div class="main-slideshow-container">
+  <img src="photo1.jpg" class="slide-img active" alt="Kanika 1" />
+  <img src="photo2.jpg" class="slide-img" alt="Kanika 2" />
+  <img src="photo3.jpg" class="slide-img" alt="Kanika 3" />
+  <img src="photo4.jpg" class="slide-img" alt="Kanika 4" />
+  <img src="photo5.jpg" class="slide-img" alt="Kanika 5" />
+</div>
+<div class="content-container">
+  <h1>For Kanika: My Heart’s Secret</h1>
+  <button class="wireframe-btn" onclick="revealSection(1)">Tap to Reveal a Secret</button>
+  <div id="section1" class="section">
+    <div class="side-slideshow">
+      <img src="photo1.jpg" class="side-slide-img active" alt="Kanika 1 Small" />
+      <img src="photo2.jpg" class="side-slide-img" alt="Kanika 2 Small" />
+      <img src="photo3.jpg" class="side-slide-img" alt="Kanika 3 Small" />
+      <img src="photo4.jpg" class="side-slide-img" alt="Kanika 4 Small" />
+      <img src="photo5.jpg" class="side-slide-img" alt="Kanika 5 Small" />
+    </div>
+    <div class="section-text">
+      Kanika, did you know that every time I hear your name, my heart skips a beat?
+      <br><br>
+      <button class="wireframe-btn" onclick="revealSection(2)">Next Secret</button>
+    </div>
+  </div>
+  <div id="section2" class="section">
+    <div class="side-slideshow">
+      <img src="photo1.jpg" class="side-slide-img active" alt="Kanika 1 Small" />
+      <img src="photo2.jpg" class="side-slide-img" alt="Kanika 2 Small" />
+      <img src="photo3.jpg" class="side-slide-img" alt="Kanika 3 Small" />
+      <img src="photo4.jpg" class="side-slide-img" alt="Kanika 4 Small" />
+      <img src="photo5.jpg" class="side-slide-img" alt="Kanika 5 Small" />
+    </div>
+    <div class="section-text">
+      I realized something magical: every memory, every smile, every moment—becomes unforgettable when it has 'Kanika' in it.
+      <br><br>
+      <button class="wireframe-btn" onclick="revealSection(3)">Another Secret</button>
+    </div>
+  </div>
+  <div id="section3" class="section">
+    <div class="side-slideshow">
+      <img src="photo1.jpg" class="side-slide-img active" alt="Kanika 1 Small" />
+      <img src="photo2.jpg" class="side-slide-img" alt="Kanika 2 Small" />
+      <img src="photo3.jpg" class="side-slide-img" alt="Kanika 3 Small" />
+      <img src="photo4.jpg" class="side-slide-img" alt="Kanika 4 Small" />
+      <img src="photo5.jpg" class="side-slide-img" alt="Kanika 5 Small" />
+    </div>
+    <div class="section-text">
+      The name 'Kanika' is like a beautiful song—one I want to listen to every day for the rest of my life.
+      <br><br>
+      <button class="wireframe-btn" onclick="revealLyrics()">Reveal My Heart in Lyrics</button>
+    </div>
+  </div>
+  <div id="lyricsCard" class="lyrics-card">
+    <p>When I look at you, Kanika, the world just fades away...</p>
+    <p>Your smile is a song I want on repeat forever.</p>
+    <p>Every heartbeat writes your name in my story.</p>
+    <p>And every dream ends with a longing to ask you...</p>
+    <button class="wireframe-btn" onclick="revealFinal()">The Final Secret</button>
+  </div>
+  <div id="finalQuestion" class="final-question">
+    Kanika, will you make me the happiest person in the world and say “Yes” to being together, always?
+  </div>
+  <div class="audio-container" id="musicContainer">
+    <div class="music-player">
+      <div class="player-header">Now Playing: Kanika's Song</div>
+      <div class="player-controls">
+        <audio id="backgroundAudio" autoplay loop controls>
+          <source src="your-song.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="player-footer">&#10084; Love is in the air &#10084;</div>
+    </div>
+  </div>
+</div>
+<script>
+  // Main slideshow logic
+  const mainSlides = document.querySelectorAll('.main-slideshow-container .slide-img');
+  let mainSlideIndex = 0;
+  function changeMainSlide() {
+    mainSlides.forEach(s => s.classList.remove('active'));
+    mainSlideIndex = (mainSlideIndex + 1) % mainSlides.length;
+    mainSlides[mainSlideIndex].classList.add('active');
+  }
+  setInterval(changeMainSlide, 4000);
+
+  // Side slideshows logic
+  const sideSlidesArrays = [];
+  document.querySelectorAll('.side-slideshow').forEach(container => {
+    const slides = container.querySelectorAll('.side-slide-img');
+    sideSlidesArrays.push({container, slides, index:0});
+    slides[0].classList.add('active');
+  });
+  setInterval(() => {
+    sideSlidesArrays.forEach(slideshow => {
+      slideshow.slides[slideshow.index].classList.remove('active');
+      slideshow.index = (slideshow.index + 1) % slideshow.slides.length;
+      slideshow.slides[slideshow.index].classList.add('active');
+    });
+  }, 4000);
+
+  const audioContainer = document.getElementById('musicContainer');
+  const audio = document.getElementById('backgroundAudio');
+  audioContainer.classList.remove('show'); // Hide music player initially
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      audio.play().catch(() => {});
+    }, 2000);
+  });
+  function tryPlayAudio() {
+    audio.play().catch(() => {});
+  }
+
+  let firstTapDone = false;
+  function revealSection(n) {
+    if(!firstTapDone) {
+      document.querySelectorAll('.section.show').forEach(s => s.classList.remove('show'));
+      audioContainer.classList.add('show');
+      firstTapDone = true;
+    }
+    const prev = n - 1;
+    if(prev >= 1){
+      document.getElementById('section'+prev).style.display = 'none';
+    }
+    document.getElementById('section'+n).classList.add('show');
+    tryPlayAudio();
+    setTimeout(() => {
+      document.getElementById('section'+n).scrollIntoView({ behavior: 'smooth' });
+    }, 400);
+    // Do NOT show lyrics card here!
+  }
+  function revealLyrics() {
+    document.getElementById('section3').style.display = 'none';
+    document.getElementById('lyricsCard').classList.add('show');
+    tryPlayAudio();
+    setTimeout(() => {
+      document.getElementById('lyricsCard').scrollIntoView({ behavior: 'smooth' });
+    }, 400);
+  }
+  function revealFinal() {
+    document.getElementById('lyricsCard').style.display = 'none';
+    document.getElementById('finalQuestion').classList.add('show');
+    tryPlayAudio();
+    setTimeout(() => {
+      document.getElementById('finalQuestion').scrollIntoView({ behavior: 'smooth' });
+    }, 400);
+  }
+</script>
+</body>
+</html>
